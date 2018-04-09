@@ -250,3 +250,32 @@ if var watch = appleWatch {
 ???
 
 </code></pre>
+
+# Function
+- 기본 구조  
+func functionName (param : Type) -> returnType { ... return ...}
+func functionName() {}
+
+#### practice
+>Time타입의 인자를 2개 받아, 둘을 더 한 시간을 리턴하는 함수를 만들어주세요.
+시간을 나타내는 타입 Time은 typealias로 정의되어 있습니다.
+
+<pre><code>typealias Time = (minute:Int, second:Int)
+
+let lunch = (16, 37)
+let walk = (18, 48)
+
+// 함수의 인자와 리턴 타입을 명시해주세요
+func addTime (time1:Time, time2:Time)->Time {
+    let secondSum = time1.second + time2.second
+    let second = secondSum % 60
+    let minute = time1.minute + time2.minute + Int(secondSum / 60)
+
+    // minute과 second를 이용해서 적절한 값을 리턴해주세요
+    return Time(minute,second)
+}
+
+//time1:lunch, time2:walk 가 맞는 표현인데, programmers에서는 이렇게 해야 정답처리
+let atNoon = addTime(lunch, time2:walk)
+print(atNoon)</code></pre>
+>>(35, 25)
