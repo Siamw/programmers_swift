@@ -314,3 +314,33 @@ print("tryCar의 모델 명은 ₩\(tryCar.name)이고, 총 주행 거리는 ₩
 </code></pre>
 
 >>tryCar의 모델 명은 트라이카이고, 총 주행 거리는 29.9입니다.
+
+# class
+- 구조  
+  struct Task {  
+    var title:String  
+    var time:Int?  
+
+    var owner : Employee  
+    var participant : Employee?  
+  }  
+  class Employee{  
+    var name : String?  
+    var phoneNumber : String?  
+    var boss : Employee?  
+  }    
+- class는 let으로 선언해도 class 내 변수들이 var이면 나중에 변경이 가능하다.  
+
+#### practice
+>두 대의 레이싱 카 mini01, mmini02가 서로 경주를 합니다.
+두 차는 각각 별도의 경로로 운행을 하며, 서로 다른 거리를 달리는데요.
+아래 코드를 수정해서 mini01과 mini02가 달린 각각의 거리를 정확히 계산해보세요. 예상되는 출력값은
+mini 01 run 68.5
+mini 02 run 21.6
+입니다.
+
+<pre><code>
+
+???
+
+</code></pre>
