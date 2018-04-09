@@ -278,4 +278,39 @@ func addTime (time1:Time, time2:Time)->Time {
 //time1:lunch, time2:walk 가 맞는 표현인데, programmers에서는 이렇게 해야 정답처리
 let atNoon = addTime(lunch, time2:walk)
 print(atNoon)</code></pre>
->>(35, 25)
+>>(35, 25)  
+
+# Structure
+- Swift에서 class 대안으로 많이
+- 할당 시 값을 복사, 메모리 번지를 공유하지 않는다.
+- 정의  
+    struct Task {
+      var title:String
+      var time:Int?
+    }
+- 사용
+  var callTask = Task(title:"Call to Randy", time: 10*60)  
+
+  var reportTask = Task(title : "Report to Boss", time : nil)
+
+  var todayTask:[Task] = []  
+  todayTask += [callTask, reportTask]  
+  todayTask[1].time = 15*60  
+
+#### practice
+>Car struct는 자동차의 모델명과 총 주행 거리(km단위)를 저장하는 구조체입니다.
+모델명은 트라이카, 주행거리 29.9km인 Car struct의 인스턴스 tryCar를 만들어 보세요.
+
+<pre><code>
+struct Car {
+    let name:String
+    var distance:Double
+}
+
+// tryCar의 모델명은 "트라이카"이고, 총 주행 거리는 29.9km입니다.
+var tryCar = Car(name :"트라이카", distance: 29.9)
+
+print("tryCar의 모델 명은 ₩\(tryCar.name)이고, 총 주행 거리는 ₩\(tryCar.distance)입니다.")
+</code></pre>
+
+>>tryCar의 모델 명은 트라이카이고, 총 주행 거리는 29.9입니다.
