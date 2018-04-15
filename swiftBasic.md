@@ -528,3 +528,62 @@ print(truck.mileage)
 
 >>[main.Driving(car: main.Car, distance: 30)]
 30
+
+# Enum Associated value
+- Enum case에 값을 할당하는 것
+- case와 함께 추가적인 값을 저장하고, case 사용시 활용한다.
+- swift enum 활용도를 획기적으로 높아짐
+- 예시 (code from The Swift Programming Language, Apple)  
+    enum Barcode {  
+      //case를 활용하는 데 필요한 값들을 따로 선언 할 필요 없이 같이 저장 할 수 있다.  
+      case UPCA(Int, Int, Int, Int)  
+      case QRCode(String)  
+    }  
+    var productBarcode = Barcode.UPCA(8, 85909, 51226, 3)  
+    productBarcode = .QRCode("ABCDEFGHIJKLMNOP")  
+- 예시  
+  enum TaskType{  
+    case Call(number:String)  
+    case Report(to:Employee, when:String)  
+    case Meet(with:Employee, location:String)  
+    case Support(who:Employee, duration:Int)  
+  }  
+
+  //struct 안에 아래 함수 구현하여 사용한다.  
+  func doBasicTask() ->String{  
+    let taskDescription:fuelString  
+    switch type{  
+      case .Call(let number) :  
+        taskDescription = "₩\(owner.name) make a call to   ₩\(number)"  
+        ...
+    }  
+    return taskDescription  
+  }  
+
+#### practice
+>enum의 내부에 enum이 재귀적으로 호출되는 경우, indirect enum와 같이 indirect 키워드를 앞에 선언해야 합니다.
+앞서 Enumerations - 실습에서 보았던 Fuel에 전기 연료를 추가했습니다.
+연료를 다음과 같이 Fuel이라는 enum으로 추상화 했을 때, 디젤 연료를 사용하는 자동차 mini01과 가솔린 연료를 사용하는 자동차 mini02, 전기만을 사용하는 자동차 sedan01을 enum으로 표현해보세요
+
+- enum의 내부에 enum이 재귀적으로 호출되는 경우, 'indirect enum'이라고 선언해주어야 한다.
+
+<pre><code>
+indirect enum Fuel {
+    case Gasoline
+    case Diesel
+    case LPG
+    case Electic(hybrid:Fuel?)
+}
+
+let mini01Fuel = Fuel.Diesel
+let mini02Fuel = Fuel.Gasoline
+let sedan01Fuel = Fuel.Electic(hybrid:nil)
+
+print("mini01은 연료로 ₩\(mini01Fuel)을 씁니다.")
+print("mini02는 연료로 ₩\(mini02Fuel)을 씁니다.")
+print("sedan01은 연료로 ₩\(sedan01Fuel)을 씁니다.")
+</code></pre>
+
+>>mini01은 연료로 Diesel을 씁니다.
+mini02는 연료로 Gasoline을 씁니다.
+sedan01은 연료로 Electic(nil)을 씁니다.
