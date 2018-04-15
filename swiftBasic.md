@@ -427,20 +427,20 @@ print("mini01은 연료로 \(mini01Fuel)을 쓰고, mini02는 연료로 \(mini02
     }  
     var callTask = Task(type: .Call, owner: me) //이런식으로 struct, class안의 init을 사용.
 - class에서의 초기화에서 init 안에 또 init을 선언하려고 하면 에러메세지가 뜬다. (Designated initializer for 'something' cannot delegate ...)  
-    - convenience init 을 사용해야 한다.  
-    - struct보다 복잡 (초기화 2편에서 자세히 다룰 것)
-    
+  - convenience init 을 사용해야 한다.  
+  - struct보다 복잡 (초기화 2편에서 자세히 다룰 것)
+
     #### practice
     >앞선 Class 실습의 class Car에 차의 좌석 수, 연료 타입 속성을 추가했습니다.
     새로 추가된 속성들은 모두 변하지 않는 속성인데요. 때문에 let으로 정의해 초기화 시 함께 값을 입력해야 합니다.
     적절한 초기화 함수를 만들어서 자동차 mini01과 mini02 인스턴스를 생성해보세요.
-    
+
     <code><pre>
     enum Fuel {
     case Gasoline
     case Diesel
     case LPG
-    
+
     var typeFuel:String{//computed property
         get{
             let fuelString:String
@@ -460,17 +460,71 @@ print("mini01은 연료로 \(mini01Fuel)을 쓰고, mini02는 연료로 \(mini02
         let seats:Int
         let fuel:Fuel
         var mileage:Double = 0
-    
+
     init(seats: Int, fuel: Fuel){//fuel은 enum의 이름을 써준다.
     self.seats = seats
     self.fuel = fuel.typeFuel//enum 내 computed property
         }
     }
-    
+
     let mini01 = Car(seats: 5, fuel: .Diesel)
     let mini02 = Car(seats: 5, fuel: .Gasoline)
     </pre></code>
-    
+
     >> 출력값 없음
 
+# method
+- 타입에 종속된 합수
+- 인스턴스에서 필요한 작업이나 기능을 함수로 만들어 넣은 것
+- Class, Structure, Enumeration 모두 인스턴스 메소드를 가질 수 있다.
+- self = 그 자신(this)
+- 예시(class 내부)  
+  func report() {  
+    if let myBoss = boss {  
+      print("₩\(self.name) reported to ₩\(myBoss.name)")  
+    }  
+    else {  
+      print("₩\(name) don't have boss")  
+    }  
+  }  
 
+#### practice
+> Driving struct에 car가 운행을 마칠 때 마다 car에 로그를 남기는 기능을 추가하려고 합니다.
+Driving 인스턴스를 매개변수로 받아 drivingLog 배열에 추가하고, mileage에 운행거리를 더하는 addLog함수를 Car 클래스에 더해보세요.
+1.addLog 함수에서 Driving 인스턴스를 매개변수로 받은 후
+2.인스턴스를 drivingLog에 추가하고
+3.mileage에 운행거리를 더하면 됩니다.
+
+<pre><code>
+class Car {
+    var drivingLog:[Driving] = []
+    var mileage:Int = 0
+
+    // 매개변수로 Driving 인스턴스를 받으세요
+    func addLog(drive : Driving) {
+        // 인자를 drivingLog 배열에 추가하세요
+				self.drivingLog += [drive]
+        //  mileage에 운행거리를 더하세요
+				self.mileage += drive.distance
+    }
+}
+
+struct Driving {
+    let car:Car
+    let distance:Int //운행 거리
+
+    func arrived() {
+        car.addLog(self)
+    }
+}
+
+let truck = Car()
+let deliver = Driving(car: truck, distance:30)
+deliver.arrived()
+
+print(truck.drivingLog)
+print(truck.mileage)
+</code></pre>  
+
+>>[main.Driving(car: main.Car, distance: 30)]
+30
