@@ -14,6 +14,7 @@
 		68DECE6B20834E380051E575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68DECE6920834E380051E575 /* LaunchScreen.storyboard */; };
 		68DECE7620834E390051E575 /* MoneyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DECE7520834E390051E575 /* MoneyConverterTests.swift */; };
 		68DECE8120834E390051E575 /* MoneyConverterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DECE8020834E390051E575 /* MoneyConverterUITests.swift */; };
+		68DECE8F20835AEC0051E575 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DECE8E20835AEC0051E575 /* Money.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		68DECE7C20834E390051E575 /* MoneyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68DECE8020834E390051E575 /* MoneyConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyConverterUITests.swift; sourceTree = "<group>"; };
 		68DECE8220834E390051E575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68DECE8E20835AEC0051E575 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				68DECE6020834E370051E575 /* AppDelegate.swift */,
 				68DECE6220834E370051E575 /* ViewController.swift */,
+				68DECE8E20835AEC0051E575 /* Money.swift */,
 				68DECE6420834E370051E575 /* Main.storyboard */,
 				68DECE6720834E380051E575 /* Assets.xcassets */,
 				68DECE6920834E380051E575 /* LaunchScreen.storyboard */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68DECE8F20835AEC0051E575 /* Money.swift in Sources */,
 				68DECE6320834E370051E575 /* ViewController.swift in Sources */,
 				68DECE6120834E370051E575 /* AppDelegate.swift in Sources */,
 			);
