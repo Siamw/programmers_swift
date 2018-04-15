@@ -38,11 +38,16 @@ struct Money{
     init(_ _usdollar:Double) {// '_ '를 넣어서 생성시 매개변수 이름을 쓰지 않아도 되도록 설정
             usdollar = _usdollar
     }
-    init(moneyInKRW:Double){
-        usdollar = moneyInKRW * 0.00085
+    init(_ amount:Double, currency:Currency){
+        usdollar = amount / currency.ratio
+    }
+    
+    func valueInCurrency(currency:Currency) -> String{//심볼을 사용하여 값 프린트해주는 method
+        
+        return "\(currency.symbol)"+"\(usdollar * currency.ratio)"
     }
 }
 
 let myMoney = Money(120)
-let incomeInKRW = Money(moneyInKRW: 350_000)//35만원을 넣어줌
+let incomeInKRW = Money(350_000, currency: .KRW)//35만원을 넣어줌
 
