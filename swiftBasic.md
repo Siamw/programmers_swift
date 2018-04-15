@@ -317,7 +317,7 @@ print("tryCar의 모델 명은 ₩\(tryCar.name)이고, 총 주행 거리는 ₩
 
 # class
 - 구조  
-  struct Task {  
+  struct Task {  //stored property
     var title:String  
     var time:Int?  
 
@@ -340,7 +340,137 @@ mini 02 run 21.6
 입니다.
 
 <pre><code>
+class Car {
+var mileage:Double = 0
+}
 
-???
+let mini01 = Car()
+mini01.mileage += 51.2
 
+let mini02 = Car()
+mini02.mileage += 21.6
+
+mini01.mileage += 17.3
+
+
+print("mini 01 run \(mini01.mileage)\nmini 02 run \(mini02.mileage)")
 </code></pre>
+
+>> mini 01 run 68.5
+mini 02 run 21.6
+
+# Enumeration
+- 연관성 있는 값들의 그룹을 만들어 type-safe 하게 사용  
+- 1st class type : 어디에서나 사용될 수 있는 자격(매개변수, 리턴타입, 컬렉션 등)
+- class에서 되던 기능들 추가 : computed property, method, initializer, conform to protocol
+- 구조  
+struct Task {  
+  var type:TaskType  
+
+  enum TaskType {  
+    case callTask  
+    case Report  
+    case Meet  
+    case Support  
+
+    var typeTitle:String { // computed property 기능!!  
+      get {  
+        let titleString : String  
+        switch self { //self = enumeration task type  
+          case .Call:  
+          titleString = "Call"  
+          case .Report:  
+          titleString=Report  
+          case .Meet:  
+          titleString=Meet   
+          case .Support:  
+          titleString=Support  
+        }  
+        return titleString  
+      }  
+    }  
+  }  
+}  
+//var reportTask = Task(나머지 생략, type : Task.TaskType.Report)    
+
+#### practice
+>자동차는 저마다 사용하는 연료의 종류가 다릅니다. 자동차를 크게 휘발유를 쓰는 차, 경유를 쓰는 차, 가스를 쓰는 차로 이렇게 3가지로 분류할 수 있습니다.
+연료를 다음과 같이 Fuel이라는 enum으로 추상화 했을 때, 경유를 쓰는 자동차 mini01, 휘발유를 쓰는 자동차 mini02를 enum으로 표현해 보세요.
+
+<pre><code>
+enum Fuel {
+case Gasoline // 휘발유
+case Diesel // 경유
+case LPG // 가스
+}
+
+// 빈 칸을 enum을 써서 채워보세요
+let mini01Fuel:Fuel = Fuel.Diesel
+let mini02Fuel:Fuel = Fuel.Gasoline
+
+print("mini01은 연료로 \(mini01Fuel)을 쓰고, mini02는 연료로 \(mini02Fuel)을 씁니다")
+</code></pre>
+>>mini01은 연료로 Diesel을 쓰고, mini02는 연료로 Gasoline을 씁니다
+
+# Initialize
+- 모든 stored property 들의 최초 값을 설정
+  - Stored Property : 메모리를 차지하는 Property
+  - Computed Property : 계산에 의해 값을 제공하는 Property
+- 구조  
+  Struct 안에,  
+  init (type:TaskType, owner:Employee){  
+    self.type = type  
+    self.title = type.typeTitle  
+    self.owner = owner  
+    self.time = nil  
+    self.participant = nil  
+    }  
+    var callTask = Task(type: .Call, owner: me) //이런식으로 struct, class안의 init을 사용.
+- class에서의 초기화에서 init 안에 또 init을 선언하려고 하면 에러메세지가 뜬다. (Designated initializer for 'something' cannot delegate ...)  
+    - convenience init 을 사용해야 한다.  
+    - struct보다 복잡 (초기화 2편에서 자세히 다룰 것)
+    
+    #### practice
+    >앞선 Class 실습의 class Car에 차의 좌석 수, 연료 타입 속성을 추가했습니다.
+    새로 추가된 속성들은 모두 변하지 않는 속성인데요. 때문에 let으로 정의해 초기화 시 함께 값을 입력해야 합니다.
+    적절한 초기화 함수를 만들어서 자동차 mini01과 mini02 인스턴스를 생성해보세요.
+    
+    <code><pre>
+    enum Fuel {
+    case Gasoline
+    case Diesel
+    case LPG
+    
+    var typeFuel:String{//computed property
+        get{
+            let fuelString:String
+            switch self {//self = enumeration task type
+                case .Gasoline:
+                fuelString = "Gasoline"
+                case .Diesel:
+                fuelString = "Diesel"
+                case .LPG:
+                fuelString = "LPG"
+                }
+            return fuelString
+            }
+        }
+    }
+    class Car {
+        let seats:Int
+        let fuel:Fuel
+        var mileage:Double = 0
+    
+    init(seats: Int, fuel: Fuel){//fuel은 enum의 이름을 써준다.
+    self.seats = seats
+    self.fuel = fuel.typeFuel//enum 내 computed property
+        }
+    }
+    
+    let mini01 = Car(seats: 5, fuel: .Diesel)
+    let mini02 = Car(seats: 5, fuel: .Gasoline)
+    </pre></code>
+    
+    >> 출력값 없음
+
+
